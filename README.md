@@ -29,5 +29,5 @@ Dietly is a mobile app that helps users live a healthy life by creating and foll
 
 ## 👥 Team Members
 - Frontend Developer: Yusuf Talha Yilmaz (React Native)
-- Backend Developer: Muhammed Ali Rıza Bağcı
-- Database & API Integration: Cem Onat Satır
+- Backend Developer: Muhammed Ali Rıza Bağcı (Node.js)
+- Database & API Integration: Cem Onat Satır (NoSQL)
