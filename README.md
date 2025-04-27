@@ -16,9 +16,8 @@ Dietly is a mobile app that helps users live a healthy life by creating and foll
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: React Native
-- **Backend**: Node.js
-- **Database & API Integration**: NoSQL
+- **Frontend**: Flutter
+- **Backend & Database**: Firebase
 
 ## 🧠 Future Improvements (It depends on the team members...)
 
@@ -28,6 +27,7 @@ Dietly is a mobile app that helps users live a healthy life by creating and foll
 - Cloud sync and user accounts
 
 ## 👥 Team Members
-- Frontend Developer: Yusuf Talha Yilmaz (React Native)
-- Backend Developer: Muhammed Ali Rıza Bağcı (Node.js)
-- Database & API Integration: Cem Onat Satır (NoSQL)
+- Flutter(Frontend), Backend & Database(Firebase): 
+    - Yusuf Talha Yilmaz
+    - Muhammed Ali Rıza Bağcı
+    - Cem Onat Satır
