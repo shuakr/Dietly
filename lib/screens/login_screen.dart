@@ -21,8 +21,6 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 48),
-
-            // LOGO
             Center(
               child: Stack(
                 alignment: Alignment.center,
@@ -34,7 +32,7 @@ class LoginPage extends StatelessWidget {
                   Transform.scale(
                     scale: 4.250,
                     child:Image.asset(
-                        'assets/dietlylogo.png', // logon burada olmalı
+                        'assets/dietlylogo.png',
                         height: 100,
                         width: 100,
                   )
@@ -45,7 +43,6 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            // EMAIL
             const Text(
               'Email',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -68,7 +65,6 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // PASSWORD
             const Text(
               'Password',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

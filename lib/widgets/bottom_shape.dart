@@ -101,11 +101,11 @@ class PentagonPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final path = Path();
-    path.moveTo(0, size.height); // sol alt
-    path.lineTo(size.width * 0.25, 0); // sol tepe
-    path.lineTo(size.width * 0.5, size.height * 0.6); // orta alt
-    path.lineTo(size.width * 0.75, 0); // sağ tepe
-    path.lineTo(size.width, size.height); // sağ alt
+    path.moveTo(0, size.height);
+    path.lineTo(size.width * 0.25, 0);
+    path.lineTo(size.width * 0.5, size.height * 0.6);
+    path.lineTo(size.width * 0.75, 0);
+    path.lineTo(size.width, size.height);
     path.close();
 
     canvas.drawPath(path, paint);

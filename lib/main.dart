@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Sağ üstte debug yazısını kapatır
+      debugShowCheckedModeBanner: false,
       home: const LoginPage(), // İşte burada LoginScreen'i açıyoruz
     );
   }
