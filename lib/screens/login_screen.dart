@@ -9,6 +9,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D6),
+      resizeToAvoidBottomInset: false, //This prevents our design from interfering with movement with the keyboard.
             body: Stack(
               children: <Widget> [
                 const Align(
