@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:icons_plus/icons_plus.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -143,7 +143,7 @@ class LoginPage extends StatelessWidget {
               onPressed: () {
                 // Google ile giriş işlemi buraya eklenecek
               },
-              icon: const Icon(Icons.android, color: Colors.white),
+              icon: const Icon(Bootstrap.google, color: Colors.white),
               label: const Text(
                 'Google',
                 style: TextStyle(
@@ -152,7 +152,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black87,
+                backgroundColor: const Color(0xFF800020),
                 padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 32),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
