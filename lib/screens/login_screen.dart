@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:dietly/widgets/bottom_triangles.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,12 +9,18 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D6),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 48),
+            body: Stack(
+              children: <Widget> [
+                const Align(
+                  alignment: Alignment.bottomCenter,
+                  child: BottomTriangles(),
+                ),
+            SingleChildScrollView(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 48),
 
             // LOGO
             Center(
@@ -156,13 +163,16 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 32),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
               ),
-            ),
+            ],
+          ),
 
-          ],
         ),
-      ),
+      ]
+            )
     );
   }
 }
+
