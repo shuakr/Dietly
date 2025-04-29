@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:dietly/widgets/bottom_triangles.dart';
+import 'package:dietly/widgets/bottom_shape.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
               children: <Widget> [
                 const Align(
                   alignment: Alignment.bottomCenter,
-                  child: BottomTriangles(),
+                  child: BottomShape(),
                 ),
             SingleChildScrollView(
               padding: const EdgeInsets.all(32),
