@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Sağ üstte debug yazısını kapatır
-      home: const LoginScreen(), // İşte burada LoginScreen'i açıyoruz
+      home: const LoginPage(), // İşte burada LoginScreen'i açıyoruz
     );
   }
 }
