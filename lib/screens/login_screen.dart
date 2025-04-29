@@ -15,8 +15,8 @@ class LoginScreen extends StatelessWidget {
             // Logo
             Image.asset(
               'assets/dietlylogo.png', // logonun yolunu buna göre düzenle
-              width: 100,
-              height: 100,
+              width: 500,
+              height: 500,
             ),
             const SizedBox(height: 32),
 
