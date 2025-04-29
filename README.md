@@ -1,8 +1,8 @@
-# 🍏 Dietly - Mobile Diet Planning Application
+# 🍎 Dietly - Mobile Diet Planning Application
 
 Dietly is a mobile app that helps users live a healthy life by creating and following personal diet plans. It offers a simple and user-friendly interface where users can plan their meals, track their nutrition, and get useful suggestions based on their goals and needs.
 
-## 🔑 Features
+## 👀 Features
 
 - User registration and login (email/password or social media)
 - Personalized diet plans based on age, weight, height, gender, lifestyle, and goals
@@ -14,19 +14,19 @@ Dietly is a mobile app that helps users live a healthy life by creating and foll
 - Secure data storage and privacy-compliant structure (GDPR/KVKK)
 
 
-## 🛠️ Technologies Used
+## 💻 Technologies Used
 
 - **Frontend**: Flutter
 - **Backend & Database**: Firebase
 
-## 🧠 Future Improvements (It depends on the team members...)
+## 🔜 Future Improvements (It depends on the team members...)
 
 - Integration with wearable devices (e.g. Fitbit, Apple Health)
 - AI-based meal suggestions
 - Multi-language support
 - Cloud sync and user accounts
 
-## 👥 Team Members
+## 🤜🤛 Team Members
 - Flutter(Frontend), Backend & Database(Firebase): 
     - Yusuf Talha Yilmaz
     - Muhammed Ali Rıza Bağcı
