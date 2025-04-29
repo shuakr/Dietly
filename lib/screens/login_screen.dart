@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -126,6 +127,39 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 32),
+
+            const Text(
+              'Continue with:',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            ElevatedButton.icon(
+              onPressed: () {
+                // Google ile giriş işlemi buraya eklenecek
+              },
+              icon: const Icon(Icons.android, color: Colors.white),
+              label: const Text(
+                'Google',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black87,
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 32),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+
           ],
         ),
       ),
