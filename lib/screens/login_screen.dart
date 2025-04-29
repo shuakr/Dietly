@@ -1,3 +1,4 @@
+import 'package:dietly/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
@@ -112,7 +113,12 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RegisterPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF800020),
                       padding: const EdgeInsets.symmetric(vertical: 16),
