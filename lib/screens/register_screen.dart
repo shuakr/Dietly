@@ -14,7 +14,6 @@ class RegisterPage extends StatelessWidget {
           children: [
             const SizedBox(height: 48),
 
-            // LOGO
             Center(
               child: Stack(
                 alignment: Alignment.center,
@@ -37,7 +36,6 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            // FULL NAME
             const Text('Full Name', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
@@ -54,7 +52,6 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // EMAIL
             const Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
@@ -72,7 +69,6 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // PASSWORD
             const Text('Password', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
@@ -90,7 +86,6 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // CONFIRM PASSWORD
             const Text('Confirm Password', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
@@ -102,6 +97,29 @@ class RegisterPage extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            ElevatedButton(
+              onPressed: () {
+                // Şimdilik bir işlem yok, ileride Firebase işlemi yapılacak
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF800020),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'REGISTER',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ),
