@@ -31,12 +31,12 @@ class RegisterPage extends StatelessWidget {
                     height: 120,
                   ),
                   Transform.scale(
-                    scale: 4.250,
-                    child: Image.asset(
+                      scale: 4.250,
+                      child: Image.asset(
                         'assets/dietlylogo.png',
-                          height: 100,
-                          width: 100,
-                    ),
+                        height: 100,
+                        width: 100,
+                      )
                   )
                 ],
               ),
@@ -44,7 +44,8 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            const Text('Full Name', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+                'Full Name', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
               decoration: InputDecoration(
@@ -65,7 +66,7 @@ class RegisterPage extends StatelessWidget {
             TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintText: 'you@example.com',
+                hintText: 'your@example.com',
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
@@ -77,7 +78,8 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            const Text('Password', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+                'Password', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
               obscureText: true,
@@ -94,7 +96,8 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            const Text('Confirm Password', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Confirm Password',
+                style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
               obscureText: true,
@@ -109,7 +112,7 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
 
             ElevatedButton(
               onPressed: () {
