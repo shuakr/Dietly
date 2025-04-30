@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dietly/widgets/bottom_shape.dart';
+import 'login_screen.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -7,13 +9,19 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D6),
-      body: SingleChildScrollView(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget> [
+      const Align(
+      alignment: Alignment.bottomCenter,
+        child: BottomShape(),
+      ),
+      SingleChildScrollView(
         padding: const EdgeInsets.all(32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 48),
-
             Center(
               child: Stack(
                 alignment: Alignment.center,
