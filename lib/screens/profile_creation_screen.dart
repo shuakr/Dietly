@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Font Awesome ikonları için
+import 'package:dietly/widgets/bottom_shape.dart';
 
 class ProfileCreationScreen extends StatefulWidget {
   const ProfileCreationScreen({super.key});
@@ -85,196 +86,196 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
           ),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.white
+            color: Colors.white
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () => _showIconSelectionBottomSheet(context),
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  _selectedProfileIcon ?? FontAwesomeIcons.user,
-                  size: 60,
-                  color: Colors.grey[800],
-                ),
-              ),
-            ),
-            const SizedBox(height: 24.0),
-            TextFormField(
-              controller: _fullNameController,
-              decoration: InputDecoration( // const kaldırıldı
-                labelText: 'Full Name',
-                prefixIcon: const Icon(FontAwesomeIcons.user),
-                hintText: 'Your full name',
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              controller: _birthDateController,
-              decoration: InputDecoration( // const kaldırıldı
-                labelText: 'Date of Birth (DD/MM/YYYY)',
-                prefixIcon: const Icon(FontAwesomeIcons.calendar),
-                hintText: 'DD/MM/YYYY',
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.date_range),
-                  onPressed: () => _selectDate(context),
-                ),
-              ),
-              readOnly: true,
-              onTap: () => _selectDate(context),
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              controller: _heightController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration( // const kaldırıldı
-                labelText: 'Height (cm)',
-                prefixIcon: const Icon(FontAwesomeIcons.rulerVertical),
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              controller: _weightController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration( // const kaldırıldı
-                labelText: 'Weight (kg)',
-                prefixIcon: const Icon(FontAwesomeIcons.weightScale),
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            InputDecorator(
-              decoration: InputDecoration( // const kaldırıldı
-                labelText: 'Gender',
-                prefixIcon: const Icon(FontAwesomeIcons.venusMars),
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: RadioListTile<String>(
-                      title: const Text('Male'),
-                      value: 'male',
-                      groupValue: _selectedGender,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedGender = value;
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: RadioListTile<String>(
-                      title: const Text('Female'),
-                      value: 'female',
-                      groupValue: _selectedGender,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedGender = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32.0),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Profil oluşturma işlemleri
-                      if (kDebugMode) {
-                        print('Profile created(for myself).');
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF800020),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'Create(for myself)',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+      body: Stack(
+        children: [
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: BottomShape(),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => _showIconSelectionBottomSheet(context),
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child: Icon(
+                      _selectedProfileIcon ?? FontAwesomeIcons.user,
+                      size: 60,
+                      color: Colors.grey[800],
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Profil oluşturma işlemleri (başkası için)
-                      if (kDebugMode) {
-                        print('Profile created(for other person).');
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF800020),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'Create(for other person)',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                const SizedBox(height: 24.0),
+                _buildTextField(
+                  controller: _fullNameController,
+                  label: 'Full Name',
+                  hint: 'Your full name',
+                  icon: FontAwesomeIcons.user,
+                ),
+                const SizedBox(height: 16.0),
+                _buildTextField(
+                  controller: _birthDateController,
+                  label: 'Date of Birth (DD/MM/YYYY)',
+                  hint: 'DD/MM/YYYY',
+                  icon: FontAwesomeIcons.calendar,
+                  readOnly: true,
+                  onTap: () => _selectDate(context),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.date_range),
+                    onPressed: () => _selectDate(context),
                   ),
+                ),
+                const SizedBox(height: 16.0),
+                _buildTextField(
+                  controller: _heightController,
+                  label: 'Height (cm)',
+                  icon: FontAwesomeIcons.rulerVertical,
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 16.0),
+                _buildTextField(
+                  controller: _weightController,
+                  label: 'Weight (kg)',
+                  icon: FontAwesomeIcons.weightScale,
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 16.0),
+                _buildGenderSelection(),
+                const SizedBox(height: 32.0),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCreateButton(
+                        label: 'Create(for myself)',
+                        onPressed: () {
+                          if (kDebugMode) {
+                            print('Profile created(for myself).');
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _buildCreateButton(
+                        label: 'Create(for other person)',
+                        onPressed: () {
+                          if (kDebugMode) {
+                            print('Profile created(for other person).');
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    String? hint,
+    TextInputType? keyboardType,
+    bool readOnly = false,
+    VoidCallback? onTap,
+    Widget? suffixIcon,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      readOnly: readOnly,
+      onTap: onTap,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        prefixIcon: Icon(icon),
+        suffixIcon: suffixIcon,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGenderSelection() {
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: 'Gender',
+        prefixIcon: const Icon(FontAwesomeIcons.venusMars),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: RadioListTile<String>(
+              title: const Text('Male'),
+              value: 'male',
+              groupValue: _selectedGender,
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+          Expanded(
+            child: RadioListTile<String>(
+              title: const Text('Female'),
+              value: 'female',
+              groupValue: _selectedGender,
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCreateButton({
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF800020),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
