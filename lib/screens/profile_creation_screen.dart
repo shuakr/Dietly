@@ -75,11 +75,18 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1E3D3),
+      backgroundColor: const Color(0xFFF5E6D6),
       resizeToAvoidBottomInset: true, // Klavye ile taşmayı önlemek için
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1B4D3E),
-        title: const Text('Create a Profile'),
+        backgroundColor: const Color(0xFF800020),
+        title: const Text(
+          'Create a Profile',
+          style: TextStyle(color: Colors.white
+          ),
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(32.0),
@@ -93,7 +100,6 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey),
                 ),
                 child: Icon(
                   _selectedProfileIcon ?? FontAwesomeIcons.user,
@@ -226,7 +232,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1B4D3E),
+                      backgroundColor: const Color(0xFF800020),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -251,7 +257,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1B4D3E),
+                      backgroundColor: const Color(0xFF800020),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
