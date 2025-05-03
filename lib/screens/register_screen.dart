@@ -137,19 +137,29 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () async {
                 final email = _emailController.text.trim();
                 final password = _passwordController.text.trim();
+                bool registrationSuccessful = false;
+                String errorMessage = "";
 
                 try {
                   await Auth().createUser(email: email, password: password);
-                  // Başarılı kayıt sonrası yönlendirme veya snackbar
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Kayıt başarılı!")),
-                  );
-                  Navigator.pop(context); // Login ekranına geri dön
+                  registrationSuccessful = true;
                 } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Hata: ${e.toString()}")),
-                  );
+                  errorMessage = e.toString();
                 }
+
+                  if (!mounted) return;
+
+                  if (registrationSuccessful) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Registration successful!")),
+                    );
+                    Navigator.pop(context); // Login ekranına geri dön
+                  } else if (errorMessage.isNotEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Error: $errorMessage")),
+                    );
+                  }
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF800020),
