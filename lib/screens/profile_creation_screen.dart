@@ -19,6 +19,17 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   String? _selectedGender;
   IconData? _selectedProfileIcon;
 
+  final List<IconData> _profileIcons = [
+    FontAwesomeIcons.user,
+    FontAwesomeIcons.heartPulse,
+    FontAwesomeIcons.rulerVertical,
+    FontAwesomeIcons.weightScale,
+    FontAwesomeIcons.mars,
+    FontAwesomeIcons.venus,
+    FontAwesomeIcons.utensils,
+    FontAwesomeIcons.personWalking,
+  ];
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -61,17 +72,6 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
       },
     );
   }
-
-  final List<IconData> _profileIcons = [
-    FontAwesomeIcons.user,
-    FontAwesomeIcons.heartPulse,
-    FontAwesomeIcons.rulerVertical,
-    FontAwesomeIcons.weightScale,
-    FontAwesomeIcons.mars,
-    FontAwesomeIcons.venus,
-    FontAwesomeIcons.utensils,
-    FontAwesomeIcons.personWalking,
-  ];
 
   @override
   Widget build(BuildContext context) {
