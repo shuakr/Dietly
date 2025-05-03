@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Font Awesome ikonları için
@@ -62,13 +63,13 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
 
   final List<IconData> _profileIcons = [
     FontAwesomeIcons.user,
-    FontAwesomeIcons.heartbeat,
+    FontAwesomeIcons.heartPulse,
     FontAwesomeIcons.rulerVertical,
     FontAwesomeIcons.weightScale,
     FontAwesomeIcons.mars,
     FontAwesomeIcons.venus,
     FontAwesomeIcons.utensils,
-    FontAwesomeIcons.walking,
+    FontAwesomeIcons.personWalking,
   ];
 
   @override
@@ -220,7 +221,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Profil oluşturma işlemleri
-                      print('Profile created(for myself).');
+                      if (kDebugMode) {
+                        print('Profile created(for myself).');
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1B4D3E),
@@ -243,7 +246,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Profil oluşturma işlemleri (başkası için)
-                      print('Profile created(for other person).');
+                      if (kDebugMode) {
+                        print('Profile created(for other person).');
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1B4D3E),
