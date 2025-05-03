@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   icons_plus: ^5.0.0
   firebase_core: ^3.13.0
+  firebase_auth: ^5.5.3
 
 dev_dependencies:
   flutter_test:
