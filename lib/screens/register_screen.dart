@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
+import '../service/auth.dart';
 import 'login_screen.dart';
+
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -115,8 +117,22 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             ElevatedButton(
-              onPressed: () {
-                // Şimdilik bir işlem yok, ileride Firebase işlemi yapılacak
+              onPressed: () async {
+                final email = _emailController.text.trim();
+                final password = _passwordController.text.trim();
+
+                try {
+                  await Auth().createUser(email: email, password: password);
+                  // Başarılı kayıt sonrası yönlendirme veya snackbar
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Kayıt başarılı!")),
+                  );
+                  Navigator.pop(context); // Login ekranına geri dön
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Hata: ${e.toString()}")),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF800020),
