@@ -81,6 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'your@example.com',
@@ -99,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 'Password', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: '********',
