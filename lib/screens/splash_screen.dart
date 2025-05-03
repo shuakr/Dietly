@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart'; // Animasyon için
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,12 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
             // Lottie animasyonu
             Lottie.asset('assets/animations/splash_screen.json', width: 200),
             const SizedBox(height: 20),
-            const Text(
+            Text(
               "Dietly",
-              style: TextStyle(
-                fontSize: 32,
+              style: GoogleFonts.robotoSlab(
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Color(0xFF800020),
                 letterSpacing: 2,
               ),
             ),
