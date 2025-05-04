@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
+import '../service/auth.dart';
 import 'login_screen.dart';
 
-class RegisterPage extends StatelessWidget {
+
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +81,7 @@ class RegisterPage extends StatelessWidget {
             const Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'your@example.com',
@@ -82,6 +100,7 @@ class RegisterPage extends StatelessWidget {
                 'Password', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: '********',
@@ -115,8 +134,32 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             ElevatedButton(
-              onPressed: () {
-                // Şimdilik bir işlem yok, ileride Firebase işlemi yapılacak
+              onPressed: () async {
+                final email = _emailController.text.trim();
+                final password = _passwordController.text.trim();
+                bool registrationSuccessful = false;
+                String errorMessage = "";
+
+                try {
+                  await Auth().createUser(email: email, password: password);
+                  registrationSuccessful = true;
+                } catch (e) {
+                  errorMessage = e.toString();
+                }
+
+                  if (!mounted) return;
+
+                  if (registrationSuccessful) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Registration successful!")),
+                    );
+                    Navigator.pop(context); // Login ekranına geri dön
+                  } else if (errorMessage.isNotEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Error: $errorMessage")),
+                    );
+                  }
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF800020),

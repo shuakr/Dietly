@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "513259503512",
+    "project_id": "dietly-f2b4b",
+    "storage_bucket": "dietly-f2b4b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513259503512:android:6bbd296c7c79bc418ef5ed",
+        "android_client_info": {
+          "package_name": "com.example.dietly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVTkfNa7cO5vaQKMas8BDxa6VrPY-JKN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
