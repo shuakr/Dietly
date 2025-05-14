@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
 import 'package:dietly/screens/register_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class LoginPage extends StatelessWidget {
