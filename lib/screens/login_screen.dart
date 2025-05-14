@@ -8,7 +8,6 @@ import 'package:dietly/service/google_auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,9 +157,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             ElevatedButton.icon(
-              onPressed: () {
-                // Google ile giriş işlemi buraya eklenecek
-              },
+              onPressed: () => _handleGoogleSignIn(context),
               icon: const Icon(Bootstrap.google, color: Colors.white),
               label: const Text(
                 'Google',
@@ -186,4 +183,23 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+void _handleGoogleSignIn(BuildContext context) async {
+  final googleAuthService = GoogleAuthService();
+  final userCredential = await googleAuthService.signInWithGoogle();
+
+  if (userCredential != null) {
+    // Giriş başarılı, profil oluşturma ekranına yönlendir
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const ProfileCreationScreen()),
+    );
+  } else {
+    // Giriş başarısız, kullanıcıya mesaj göster
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Google ile giriş başarısız")),
+    );
+  }
+}
+
 
