@@ -148,7 +148,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             const Text(
-              'Continue with:',
+              'Sign in with:',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black54,
