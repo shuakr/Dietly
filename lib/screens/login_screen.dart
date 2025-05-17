@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 16),
 
             ElevatedButton.icon(
-              onPressed: () => _handleGoogleSignIn(context),
+              onPressed: _handleGoogleSignIn,
               icon: const Icon(Bootstrap.google, color: Colors.white),
               label: const Text(
                 'Google',
