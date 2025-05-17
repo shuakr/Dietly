@@ -7,9 +7,69 @@ import 'package:dietly/screens/register_screen.dart';
 import 'package:dietly/service/google_auth_service.dart';
 
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+class _LoginPageState extends State<LoginPage> {
+  // E-posta ve şifre alanları için controller'lar
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // E-posta/şifre ile giriş yapma işlemi
+  Future<void> _signInWithEmailAndPassword() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    try {
+      // Firebase ile giriş yapma
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Giriş başarılı → profil oluşturma ekranına yönlendir
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileCreationScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      // Giriş başarısızsa hataya göre kullanıcıya mesaj göster
+      String errorMessage = 'Bir hata oluştu.';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'Bu e-posta ile kullanıcı bulunamadı.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Şifre hatalı.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    }
+  }
+
+  // Google ile giriş işlemi
+  Future<void> _handleGoogleSignIn() async {
+    final googleAuthService = GoogleAuthService();
+    final userCredential = await googleAuthService.signInWithGoogle();
+
+    if (userCredential != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileCreationScreen(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Google ile giriş başarısız")),
+      );
+    }
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D6),
