@@ -23,14 +23,15 @@ class _LoginPageState extends State<LoginPage> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+
     try {
-      // Firebase ile giriş yapma
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Giriş başarılı → profil oluşturma ekranına yönlendir
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
