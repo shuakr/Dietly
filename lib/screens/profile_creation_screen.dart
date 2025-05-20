@@ -189,6 +189,16 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                   if (await googleSignIn.isSignedIn()) {
                     await googleSignIn.signOut();
                   }
+                  // Control
+                  if (FirebaseAuth.instance.currentUser == null) {
+                    if (kDebugMode) {
+                      print('✅ Çıkış başarılı: currentUser == null');
+                    }
+                  } else {
+                    if (kDebugMode) {
+                      print('❌ Çıkış başarısız: currentUser != null');
+                    }
+                  }
 
                   // Login ekranına yönlendir (önceki sayfaları temizleyerek)
                   Navigator.of(context).pushAndRemoveUntil(
