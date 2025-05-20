@@ -1,6 +1,8 @@
 import 'package:dietly/screens/profile_creation_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
 import 'package:dietly/screens/register_screen.dart';
@@ -39,18 +41,33 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      // Giriş başarısızsa hataya göre kullanıcıya mesaj göster
-      String errorMessage = 'Bir hata oluştu.';
-      if (e.code == 'user-not-found') {
-        errorMessage = 'Bu e-posta ile kullanıcı bulunamadı.';
-      } else if (e.code == 'wrong-password') {
-        errorMessage = 'Şifre hatalı.';
+      print("Firebase Auth Hatası: ${e.code}");
+
+      String errorMessage;
+
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'Bu e-posta ile kullanıcı bulunamadı.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Şifre hatalı.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'Geçersiz e-posta adresi.';
+          break;
+        case 'invalid-credential':
+          errorMessage = 'Kimlik bilgileri geçersiz. Lütfen e-posta ve şifrenizi kontrol edin.';
+          break;
+        default:
+          errorMessage = 'Bir hata oluştu: ${e.code}';
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage)),
       );
     }
+
+
   }
 
   // Google ile giriş işlemi
