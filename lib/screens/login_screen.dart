@@ -1,13 +1,96 @@
 import 'package:dietly/screens/profile_creation_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
 import 'package:dietly/screens/register_screen.dart';
 import 'package:dietly/service/google_auth_service.dart';
 
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+class _LoginPageState extends State<LoginPage> {
+  // E-posta ve şifre alanları için controller'lar
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // E-posta/şifre ile giriş yapma işlemi
+  Future<void> _signInWithEmailAndPassword() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileCreationScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print("Firebase Auth Hatası: ${e.code}");
+      }
+
+      String errorMessage;
+
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'Bu e-posta ile kullanıcı bulunamadı.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Şifre hatalı.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'Geçersiz e-posta adresi.';
+          break;
+        case 'invalid-credential':
+          errorMessage = 'Kimlik bilgileri geçersiz. Lütfen e-posta ve şifrenizi kontrol edin.';
+          break;
+        default:
+          errorMessage = 'Bir hata oluştu: ${e.code}';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    }
+
+
+  }
+
+  // Google ile giriş işlemi
+  Future<void> _handleGoogleSignIn() async {
+    final googleAuthService = GoogleAuthService();
+    final userCredential = await googleAuthService.signInWithGoogle();
+
+    if (userCredential != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileCreationScreen(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Google ile giriş başarısız")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +136,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'you@example.com',
@@ -75,6 +159,7 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 hintText: '********',
@@ -96,10 +181,7 @@ class LoginPage extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ProfileCreationScreen()),
-                        );
+                      _signInWithEmailAndPassword();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF800020),
@@ -157,7 +239,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             ElevatedButton.icon(
-              onPressed: () => _handleGoogleSignIn(context),
+              onPressed: _handleGoogleSignIn,
               icon: const Icon(Bootstrap.google, color: Colors.white),
               label: const Text(
                 'Google',
@@ -184,22 +266,5 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-void _handleGoogleSignIn(BuildContext context) async {
-  final googleAuthService = GoogleAuthService();
-  final userCredential = await googleAuthService.signInWithGoogle();
-
-  if (userCredential != null) {
-    // Giriş başarılı, profil oluşturma ekranına yönlendir
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const ProfileCreationScreen()),
-    );
-  } else {
-    // Giriş başarısız, kullanıcıya mesaj göster
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Google ile giriş başarısız")),
-    );
-  }
-}
 
 
