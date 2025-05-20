@@ -179,10 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ProfileCreationScreen()),
-                        );
+                      _signInWithEmailAndPassword();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF800020),
@@ -267,22 +264,5 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-void _handleGoogleSignIn(BuildContext context) async {
-  final googleAuthService = GoogleAuthService();
-  final userCredential = await googleAuthService.signInWithGoogle();
-
-  if (userCredential != null) {
-    // Giriş başarılı, profil oluşturma ekranına yönlendir
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const ProfileCreationScreen()),
-    );
-  } else {
-    // Giriş başarısız, kullanıcıya mesaj göster
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Google ile giriş başarısız")),
-    );
-  }
-}
 
 
