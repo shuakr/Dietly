@@ -41,7 +41,9 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      print("Firebase Auth Hatası: ${e.code}");
+      if (kDebugMode) {
+        print("Firebase Auth Hatası: ${e.code}");
+      }
 
       String errorMessage;
 
