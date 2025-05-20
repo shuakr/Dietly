@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Font Awesome ikonları için
 import 'package:dietly/widgets/bottom_shape.dart';
+
+import 'login_screen.dart';
 
 class ProfileCreationScreen extends StatefulWidget {
   const ProfileCreationScreen({super.key});
@@ -176,11 +180,25 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context,  '/login'); // veya: Navigator.pushReplacementNamed(context, '/login');
-                  },
+                  onPressed: () async {
+                  // Firebase çıkışı
+                  await FirebaseAuth.instance.signOut();
+
+                  // Google hesabıyla giriş yapıldıysa ondan da çık
+                  final googleSignIn = GoogleSignIn();
+                  if (await googleSignIn.isSignedIn()) {
+                    await googleSignIn.signOut();
+                  }
+
+                  // Login ekranına yönlendir (önceki sayfaları temizleyerek)
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                        (Route<dynamic> route) => false,
+                  );
+                },
+
                   child: const Text(
-                    'Back to Login',
+                    'Log Out!',
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.w500,
