@@ -176,6 +176,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_widget_catalogue:
+    dependency: "direct main"
+    description:
+      name: flutter_widget_catalogue
+      sha256: "2ffcbdbbb95b79f15dca124004f92ad5cb8f15dd05695a560f85b2b36be3cc14"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   font_awesome_flutter:
     dependency: "direct main"
     description:
