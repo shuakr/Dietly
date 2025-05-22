@@ -23,7 +23,17 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            // Diğer widgetlar sonraki commitlerde eklenecek
+            const CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage('assets/avatar.png'),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "Name and Surname",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 20),
+            // Sonraki commitlerde devam edecek
           ],
         ),
       ),
