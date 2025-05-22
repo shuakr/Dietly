@@ -13,7 +13,17 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Bu kısım sonraki commitlerde eklenecek
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Icon(Icons.arrow_back, color: mainColor),
+                  Icon(Icons.edit, color: mainColor),
+                ],
+              ),
+            ),
+            // Diğer widgetlar sonraki commitlerde eklenecek
           ],
         ),
       ),
