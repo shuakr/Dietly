@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Font Awesome ikonları için
 import 'package:dietly/widgets/bottom_shape.dart';
-
 import 'login_screen.dart';
 
 class ProfileCreationScreen extends StatefulWidget {
@@ -162,6 +161,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                         onPressed: () {
                           if (kDebugMode) {
                             print('Profile created(for myself).');
+
+                            // Redirect to HomeScreen
+                            Navigator.pushReplacementNamed(context, '/home');
                           }
                         },
                       ),
@@ -173,6 +175,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                         onPressed: () {
                           if (kDebugMode) {
                             print('Profile created(for other person).');
+
+                            // Redirect to HomeScreen
+                            Navigator.pushReplacementNamed(context, '/home');
                           }
                         },
                       ),
