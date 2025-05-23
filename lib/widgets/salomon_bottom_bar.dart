@@ -1,5 +1,6 @@
 // lib/widgets/salomon_bottom_bar.dart
 
+import 'package:dietly/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -45,7 +46,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         debugPrint("🔔 Notifications button pressed");
         break;
       case 2:
-        debugPrint("👤 Profile button pressed");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const ProfilePage()),
+        );
         break;
       case 3:
         await FirebaseAuth.instance.signOut();
