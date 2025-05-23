@@ -6,6 +6,7 @@ import 'screens/login_screen.dart'; // Ekranımızı import ediyoruz
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:dietly/screens/splash_screen.dart';
+import 'package:dietly/screens/home_screen.dart';
 
 
 void main() async {
@@ -23,12 +24,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(), // Splash artık ilk açılıyor
+      home: const SplashScreen(), //First shown SplashScreen
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/profileCreation': (context) => const ProfileCreationScreen(),
+<<<<<<< HEAD
         '/profileScreen' : (context) => const ProfilePage(),
+=======
+        '/home': (context) => const HomeScreen(), //To home page
+>>>>>>> 862186ad2f371a659b54db942e5cd55c43cc0241
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
