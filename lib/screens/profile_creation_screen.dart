@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dietly/service/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -160,11 +161,25 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                     Expanded(
                       child: _buildCreateButton(
                         label: 'Create(for myself)',
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print('Profile created(for myself).');
+                          onPressed: () async {
+                            try {
+                              await FirestoreService().createUserProfile(
+                                fullName: _fullNameController.text,
+                                birthDate: _birthDateController.text,
+                                height: double.parse(_heightController.text),
+                                weight: double.parse(_weightController.text),
+                                gender: _selectedGender ?? 'unknown',
+                              );
+                              if (kDebugMode) {
+                                print('✅ Profil başarıyla kaydedildi');
+                              }
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print('❌ Kaydetme hatası: $e');
+                              }
+                            }
                           }
-                        },
+
                       ),
                     ),
                     const SizedBox(width: 12),
