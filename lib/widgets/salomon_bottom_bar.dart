@@ -1,35 +1,44 @@
+// lib/widgets/salomon_bottom_bar.dart
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-void main() {
-  runApp(const MaterialApp(home: TestNav()));
-}
+class CustomBottomNavBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
 
-class TestNav extends StatefulWidget {
-  const TestNav({super.key});
-
-  @override
-  State<TestNav> createState() => _TestNavState();
-}
-
-class _TestNavState extends State<TestNav> {
-  int _currentIndex = 0;
+  const CustomBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(child: Text("Test Nav")),
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: [
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home),
-            title: const Text("Home"),
-            selectedColor: Colors.purple,
-          ),
-        ],
-      ),
+    return SalomonBottomBar(
+      currentIndex: currentIndex,
+      onTap: onTap,
+      items: [
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.home),
+          title: const Text("Ana Sayfa"),
+          selectedColor: Color(0xFF800020),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.notifications),
+          title: const Text("Bildirimler"),
+          selectedColor: Color(0xFF800020),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.person),
+          title: const Text("Profil"),
+          selectedColor: Color(0xFF800020),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.logout),
+          title: const Text("Çıkış"),
+          selectedColor: Color(0xFF800020),
+        ),
+      ],
     );
   }
 }
