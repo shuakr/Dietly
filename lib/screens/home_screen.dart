@@ -1,60 +1,42 @@
-import 'package:dietly/screens/login_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:dietly/widgets/salomon_bottom_bar.dart'; //Import bottom shape
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  Future<void> _signOutAndNavigateToLogin(BuildContext context) async {
-    //Firebase log out
-    await FirebaseAuth.instance.signOut();
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-    //Google log out
-    final googleSignIn = GoogleSignIn();
-    if (await googleSignIn.isSignedIn()) {
-      await googleSignIn.signOut();
-    }
-    if (FirebaseAuth.instance.currentUser == null) {
-      if (kDebugMode) {
-        print('✅ Çıkış başarılı: currentUser == null');
-      }
-    } else {
-      if (kDebugMode) {
-        print('❌ Çıkış başarısız: currentUser != null');
-      }
-    }
-    //Redirect to LogIn screen
-    Navigator.of(context).pushAndRemoveUntil(
-     MaterialPageRoute(builder: (context) => const LoginPage()),
-        (Route<dynamic> route) =>false,
-    );
-  }
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    const Center(child: Text('Ana Sayfa')),
+    const Center(child: Text('Bildirimler')),
+    const Center(child: Text('Profil')),
+    const Center(child: Text('Çıkış')),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dietly Home Screen'),
+        title: const Text('Dietly Home'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome!',
-              style: TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: () => _signOutAndNavigateToLogin(context),
-              child: const Text('Logout!'),
-            )
-          ],
-        ),
+      body: _pages[_currentIndex],
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          if (index == 3) {
+            // TODO: Firebase çıkış işlemi buraya eklenecek
+          } else {
+            setState(() {
+              _currentIndex = index;
+            });
+          }
+        },
       ),
     );
   }
