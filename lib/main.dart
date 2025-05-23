@@ -29,11 +29,9 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/profileCreation': (context) => const ProfileCreationScreen(),
-<<<<<<< HEAD
         '/profileScreen' : (context) => const ProfilePage(),
-=======
         '/home': (context) => const HomeScreen(), //To home page
->>>>>>> 862186ad2f371a659b54db942e5cd55c43cc0241
+
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
