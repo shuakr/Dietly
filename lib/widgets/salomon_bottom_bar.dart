@@ -1,10 +1,13 @@
 // lib/widgets/salomon_bottom_bar.dart
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class CustomBottomNavBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
+import '../screens/home_screen.dart';
+
+class CustomBottomNavBar extends StatefulWidget {
+  final int initialIndex;
 
   const CustomBottomNavBar({
     super.key,
