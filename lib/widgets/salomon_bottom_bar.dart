@@ -11,15 +11,59 @@ class CustomBottomNavBar extends StatefulWidget {
 
   const CustomBottomNavBar({
     super.key,
-    required this.currentIndex,
-    required this.onTap,
+    this.initialIndex = 0,
   });
+
+  @override
+  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
+}
+
+class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.initialIndex;
+  }
+
+  void _onItemTapped(int index) async {
+    if (index == currentIndex) return;
+
+    setState(() {
+      currentIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+        break;
+      case 1:
+        debugPrint("🔔 Notifications button pressed");
+        break;
+      case 2:
+        debugPrint("👤 Profile button pressed");
+        break;
+      case 3:
+        await FirebaseAuth.instance.signOut();
+        if (FirebaseAuth.instance.currentUser == null && context.mounted) {
+          debugPrint('✅ Logout successful');
+          Navigator.pushReplacementNamed(context, '/login');
+        } else {
+          debugPrint('❌ Logout failed');
+        }
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return SalomonBottomBar(
       currentIndex: currentIndex,
-      onTap: onTap,
+      onTap: _onItemTapped,
       items: [
         SalomonBottomBarItem(
           icon: const Icon(Icons.home),
