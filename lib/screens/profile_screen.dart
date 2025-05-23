@@ -1,3 +1,5 @@
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -17,9 +19,16 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Icon(Icons.arrow_back, color: mainColor),
-                  Icon(Icons.edit, color: mainColor),
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: mainColor),
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("Profile edit button pressed.");
+                      }
+                    },
+                  )
+
                 ],
               ),
             ),
