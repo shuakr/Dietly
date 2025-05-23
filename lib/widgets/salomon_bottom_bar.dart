@@ -67,23 +67,23 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       items: [
         SalomonBottomBarItem(
           icon: const Icon(Icons.home),
-          title: const Text("Ana Sayfa"),
-          selectedColor: Color(0xFF800020),
+          title: const Text("Home"),
+          selectedColor: const Color(0xFF6B0010),
         ),
         SalomonBottomBarItem(
           icon: const Icon(Icons.notifications),
-          title: const Text("Bildirimler"),
-          selectedColor: Color(0xFF800020),
+          title: const Text("Notifications"),
+          selectedColor: const Color(0xFF6B0010),
         ),
         SalomonBottomBarItem(
           icon: const Icon(Icons.person),
-          title: const Text("Profil"),
-          selectedColor: Color(0xFF800020),
+          title: const Text("Profile"),
+          selectedColor: const Color(0xFF6B0010),
         ),
         SalomonBottomBarItem(
           icon: const Icon(Icons.logout),
-          title: const Text("Çıkış"),
-          selectedColor: Color(0xFF800020),
+          title: const Text("Logout"),
+          selectedColor: const Color(0xFF6B0010),
         ),
       ],
     );
