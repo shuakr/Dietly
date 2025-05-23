@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dietly/service/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,37 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   final TextEditingController _weightController = TextEditingController();
   String? _selectedGender;
   IconData? _selectedProfileIcon;
+
+  bool validateInputs(BuildContext context) {
+    final fullName = _fullNameController.text.trim();
+    final birthDate = _birthDateController.text.trim();
+    final heightText = _heightController.text.trim();
+    final weightText = _weightController.text.trim();
+
+    if (fullName.isEmpty ||
+        birthDate.isEmpty ||
+        heightText.isEmpty ||
+        weightText.isEmpty ||
+        _selectedGender == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen tüm alanları doldurunuz.')),
+      );
+      return false;
+    }
+
+    final height = double.tryParse(heightText);
+    final weight = double.tryParse(weightText);
+
+    if (height == null || weight == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Boy ve kilo geçerli sayılar olmalıdır.')),
+      );
+      return false;
+    }
+
+    return true;
+  }
+
 
   final List<IconData> _profileIcons = [
     FontAwesomeIcons.user,
@@ -162,20 +192,36 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                       child: _buildCreateButton(
                         label: 'Create(for myself)',
                           onPressed: () async {
+                            if (!validateInputs(context)) return;
+
+                            final fullName = _fullNameController.text.trim();
+                            final birthDate = _birthDateController.text.trim();
+                            final height = double.parse(_heightController.text.trim());
+                            final weight = double.parse(_weightController.text.trim());
+                            final gender = _selectedGender!;
+
                             try {
                               await FirestoreService().createUserProfile(
-                                fullName: _fullNameController.text,
-                                birthDate: _birthDateController.text,
-                                height: double.parse(_heightController.text),
-                                weight: double.parse(_weightController.text),
-                                gender: _selectedGender ?? 'unknown',
+                                fullName: fullName,
+                                birthDate: birthDate,
+                                height: height,
+                                weight: weight,
+                                gender: gender,
                               );
-                              if (kDebugMode) {
-                                print('✅ Profil başarıyla kaydedildi');
+
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('✅ Profil başarıyla kaydedildi.')),
+                                );
                               }
                             } catch (e) {
                               if (kDebugMode) {
-                                print('❌ Kaydetme hatası: $e');
+                                print('❌ Firestore hatası: $e');
+                              }
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('⚠️ Kayıt sırasında hata oluştu: $e')),
+                                );
                               }
                             }
                           }
