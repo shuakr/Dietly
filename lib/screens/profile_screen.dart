@@ -94,6 +94,21 @@ class ProfilePage extends StatelessWidget {
                 style: TextStyle(fontSize: 14),
               ),
             ),
+            const Spacer(),
+            Container(
+              height: 90,
+              color: mainColor,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Icon(Icons.home, color: Colors.white, size: 32),
+                  Icon(Icons.notifications, color: Colors.white, size: 32),
+                  Icon(Icons.person, color: Colors.white, size: 32),
+                  Icon(Icons.settings, color: Colors.white, size: 32),
+                ],
+              ),
+            ),
           ],
         ),
       ),
