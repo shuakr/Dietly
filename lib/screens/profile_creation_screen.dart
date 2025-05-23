@@ -165,7 +165,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                             // Redirect to HomeScreen
                             Navigator.pushReplacementNamed(context, '/home');
                           }
-                          Navigator.pushNamed(context, '/profileScreen'); // Navigate to the profile screen.
+                          Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
                         },
                       ),
                     ),
@@ -180,7 +180,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                             // Redirect to HomeScreen
                             Navigator.pushReplacementNamed(context, '/home');
                           }
-                          Navigator.pushNamed(context, '/profileScreen'); // Navigate to the profile screen.
+                          Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
                         },
                       ),
                     ),
