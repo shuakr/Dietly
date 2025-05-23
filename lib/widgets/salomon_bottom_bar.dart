@@ -4,6 +4,7 @@ import 'package:dietly/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../screens/home_screen.dart';
 
@@ -28,27 +29,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     currentIndex = widget.initialIndex;
   }
 
-  void _navigateWithAnimation(Widget page) {
-    Navigator.of(context).pushReplacement(
-      PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 400),
-        pageBuilder: (context, animation, secondaryAnimation) => page,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(0.0, 1.0);
-          const end = Offset.zero;
-          const curve = Curves.easeInOut;
-
-          final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          final fadeTween = Tween<double>(begin: 0.0, end: 1.0).chain(CurveTween(curve: curve));
-
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: FadeTransition(
-              opacity: animation.drive(fadeTween),
-              child: child,
-            ),
-          );
-        },
+  /// PageTransition ile animasyonlu geçiş
+  void _navigateWithPageTransition(Widget page) {
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 400),
+        child: page,
       ),
     );
   }
@@ -62,13 +50,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
     switch (index) {
       case 0:
-        _navigateWithAnimation(const HomeScreen());
+        _navigateWithPageTransition(const HomeScreen());
         break;
       case 1:
         debugPrint("🔔 Notifications button pressed");
         break;
       case 2:
-        _navigateWithAnimation(const ProfilePage());
+        _navigateWithPageTransition(const ProfilePage());
         break;
       case 3:
         await FirebaseAuth.instance.signOut();
