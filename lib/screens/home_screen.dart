@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dietly/widgets/salomon_bottom_bar.dart'; //Import bottom shape
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,14 +31,29 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _pages[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
-        onTap: (index) {
+        onTap: (index) async {
           if (index == 3) {
-            // TODO: Firebase çıkış işlemi buraya eklenecek
+            await FirebaseAuth.instance.signOut();
+
+            if (context.mounted) {
+              Navigator.pushReplacementNamed(context, '/login');
+            }
+
           } else {
             setState(() {
               _currentIndex = index;
             });
           }
+          if (FirebaseAuth.instance.currentUser == null) {
+            if (kDebugMode) {
+              print('✅ Çıkış başarılı: currentUser == null');
+            }
+          } else {
+            if (kDebugMode) {
+              print('❌ Çıkış başarısız: currentUser != null');
+            }
+          }
+
         },
       ),
     );
