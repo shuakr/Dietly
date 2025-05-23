@@ -11,18 +11,19 @@ class FirestoreService {
     required double height,
     required double weight,
     required String gender,
+    required bool isSelfProfile,
   }) async {
     final uid = _auth.currentUser?.uid;
     if (uid == null) {
       throw Exception('User not logged in');
     }
-
-    await _firestore.collection('users').doc(uid).set({
+    await _firestore.collection('users').doc(uid).collection('profiles').add({
       'fullName': fullName,
       'birthDate': birthDate,
       'height': height,
       'weight': weight,
       'gender': gender,
+      'isSelfProfile': isSelfProfile,
       'createdAt': FieldValue.serverTimestamp(),
     });
   }
