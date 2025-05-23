@@ -1,4 +1,5 @@
 import 'package:dietly/screens/profile_creation_screen.dart';
+import 'package:dietly/screens/profile_screen.dart';
 import 'package:dietly/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart'; // Ekranımızı import ediyoruz
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/profileCreation': (context) => const ProfileCreationScreen(),
+        '/profileScreen' : (context) => const ProfilePage(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

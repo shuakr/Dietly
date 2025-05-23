@@ -163,6 +163,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                           if (kDebugMode) {
                             print('Profile created(for myself).');
                           }
+                          Navigator.pushNamed(context, '/profileScreen'); // Navigate to the profile screen.
                         },
                       ),
                     ),
@@ -174,6 +175,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                           if (kDebugMode) {
                             print('Profile created(for other person).');
                           }
+                          Navigator.pushNamed(context, '/profileScreen'); // Navigate to the profile screen.
                         },
                       ),
                     ),
