@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dietly/service/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +22,37 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   final TextEditingController _weightController = TextEditingController();
   String? _selectedGender;
   IconData? _selectedProfileIcon;
+
+  bool validateInputs(BuildContext context) {
+    final fullName = _fullNameController.text.trim();
+    final birthDate = _birthDateController.text.trim();
+    final heightText = _heightController.text.trim();
+    final weightText = _weightController.text.trim();
+
+    if (fullName.isEmpty ||
+        birthDate.isEmpty ||
+        heightText.isEmpty ||
+        weightText.isEmpty ||
+        _selectedGender == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen tüm alanları doldurunuz.')),
+      );
+      return false;
+    }
+
+    final height = double.tryParse(heightText);
+    final weight = double.tryParse(weightText);
+
+    if (height == null || weight == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Boy ve kilo geçerli sayılar olmalıdır.')),
+      );
+      return false;
+    }
+
+    return true;
+  }
+
 
   final List<IconData> _profileIcons = [
     FontAwesomeIcons.user,
@@ -158,6 +190,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                     Expanded(
                       child: _buildCreateButton(
                         label: 'Create(for myself)',
+<<<<<<< HEAD
                         onPressed: () {
                           if (kDebugMode) {
                             print('Profile created(for myself).');
@@ -167,18 +200,92 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                           }
                           Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
                         },
+=======
+                          onPressed: () async {
+                            if (!validateInputs(context)) return;
+
+                            final fullName = _fullNameController.text.trim();
+                            final birthDate = _birthDateController.text.trim();
+                            final height = double.parse(_heightController.text.trim());
+                            final weight = double.parse(_weightController.text.trim());
+                            final gender = _selectedGender!;
+
+                            try {
+                              await FirestoreService().createUserProfile(
+                                fullName: fullName,
+                                birthDate: birthDate,
+                                height: height,
+                                weight: weight,
+                                gender: gender,
+                                isSelfProfile: true,
+                              );
+
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('✅ Profil başarıyla kaydedildi.')),
+                                );
+                              }
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print('❌ Firestore hatası: $e');
+                              }
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('⚠️ Kayıt sırasında hata oluştu: $e')),
+                                );
+                              }
+                            }
+                          }
+
+>>>>>>> f798405b2803aa9d2ad9298feb87cc0061dd8510
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: _buildCreateButton(
                         label: 'Create(for other person)',
+<<<<<<< HEAD
                         onPressed: () {
                           if (kDebugMode) {
                             print('Profile created(for other person).');
 
                             // Redirect to HomeScreen
                             Navigator.pushReplacementNamed(context, '/home');
+=======
+                        onPressed: () async {
+                          if (!validateInputs(context)) return;
+
+                          final fullName = _fullNameController.text.trim();
+                          final birthDate = _birthDateController.text.trim();
+                          final height = double.parse(_heightController.text.trim());
+                          final weight = double.parse(_weightController.text.trim());
+                          final gender = _selectedGender!;
+
+                          try {
+                            await FirestoreService().createUserProfile(
+                              fullName: fullName,
+                              birthDate: birthDate,
+                              height: height,
+                              weight: weight,
+                              gender: gender,
+                              isSelfProfile: false,
+                            );
+
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('✅ Profil başarıyla kaydedildi.')),
+                              );
+                            }
+                          } catch (e) {
+                            if (kDebugMode) {
+                              print('❌ Firestore hatası: $e');
+                            }
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('⚠️ Kayıt sırasında hata oluştu: $e')),
+                              );
+                            }
+>>>>>>> f798405b2803aa9d2ad9298feb87cc0061dd8510
                           }
                           Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
                         },
