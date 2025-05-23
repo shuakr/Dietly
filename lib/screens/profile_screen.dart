@@ -1,6 +1,7 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/salomon_bottom_bar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -12,6 +13,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: bgColor,
+      bottomNavigationBar: const CustomBottomNavBar(initialIndex: 2), // 👈 eklendi
       body: SafeArea(
         child: Column(
           children: [
@@ -28,7 +30,6 @@ class ProfilePage extends StatelessWidget {
                       }
                     },
                   )
-
                 ],
               ),
             ),
@@ -47,13 +48,14 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withAlpha(0.1 as int),
+                        color: Colors.black.withAlpha(25), // ← güncellendi
                         spreadRadius: 2,
                         blurRadius: 6,
                         offset: const Offset(0, 3),
@@ -70,13 +72,14 @@ class ProfilePage extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   decoration: BoxDecoration(
                     color: mainColor,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withAlpha(0.1 as int),
+                        color: Colors.black.withAlpha(25), // ← güncellendi
                         spreadRadius: 2,
                         blurRadius: 6,
                         offset: const Offset(0, 3),
@@ -104,20 +107,6 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Container(
-              height: 90,
-              color: mainColor,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Icon(Icons.home, color: Colors.white, size: 32),
-                  Icon(Icons.notifications, color: Colors.white, size: 32),
-                  Icon(Icons.person, color: Colors.white, size: 32),
-                  Icon(Icons.settings, color: Colors.white, size: 32),
-                ],
-              ),
-            ),
           ],
         ),
       ),
