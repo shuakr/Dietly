@@ -1,9 +1,11 @@
+// Dosya: profile_creation_screen.dart
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dietly/service/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Font Awesome ikonları için
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
 import 'login_screen.dart';
 
@@ -15,10 +17,10 @@ class ProfileCreationScreen extends StatefulWidget {
 }
 
 class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
-  final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _birthDateController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  final _birthDateController = TextEditingController();
+  final _heightController = TextEditingController();
+  final _weightController = TextEditingController();
   String? _selectedGender;
   IconData? _selectedProfileIcon;
 
@@ -33,46 +35,108 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
     FontAwesomeIcons.personWalking,
   ];
 
+  bool validateInputs(BuildContext context) {
+    final fullName = _fullNameController.text.trim();
+    final birthDate = _birthDateController.text.trim();
+    final heightText = _heightController.text.trim();
+    final weightText = _weightController.text.trim();
+
+    if (fullName.isEmpty || birthDate.isEmpty || heightText.isEmpty || weightText.isEmpty || _selectedGender == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen tüm alanları doldurunuz.')),
+      );
+      return false;
+    }
+
+    if (double.tryParse(heightText) == null || double.tryParse(weightText) == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Boy ve kilo geçerli sayılar olmalıdır.')),
+      );
+      return false;
+    }
+
+    return true;
+  }
+
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(2000),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
     if (picked != null) {
-      setState(() {
-        _birthDateController.text = DateFormat('dd/MM/yyyy').format(picked);
-      });
+      _birthDateController.text = DateFormat('dd/MM/yyyy').format(picked);
     }
   }
 
   void _showIconSelectionBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: 200,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-            ),
-            itemCount: _profileIcons.length,
-            itemBuilder: (context, index) {
-              final iconData = _profileIcons[index];
-              return IconButton(
-                icon: Icon(iconData, size: 30),
-                onPressed: () {
-                  setState(() {
-                    _selectedProfileIcon = iconData;
-                  });
-                  Navigator.pop(context);
-                },
-              );
+      builder: (_) => SizedBox(
+        height: 200,
+        child: GridView.builder(
+          itemCount: _profileIcons.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          itemBuilder: (context, index) => IconButton(
+            icon: Icon(_profileIcons[index], size: 30),
+            onPressed: () {
+              setState(() {
+                _selectedProfileIcon = _profileIcons[index];
+              });
+              Navigator.pop(context);
             },
           ),
-        );
-      },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _createProfile(bool isSelfProfile) async {
+    if (!validateInputs(context)) return;
+
+    final fullName = _fullNameController.text.trim();
+    final birthDate = _birthDateController.text.trim();
+    final height = double.parse(_heightController.text.trim());
+    final weight = double.parse(_weightController.text.trim());
+    final gender = _selectedGender!;
+
+    try {
+      await FirestoreService().createUserProfile(
+        fullName: fullName,
+        birthDate: birthDate,
+        height: height,
+        weight: weight,
+        gender: gender,
+        isSelfProfile: isSelfProfile,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('✅ Profil başarıyla kaydedildi.')),
+      );
+
+      Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      if (kDebugMode) print('❌ Firestore hatası: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('⚠️ Kayıt sırasında hata oluştu: $e')),
+      );
+    }
+  }
+
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+    final googleSignIn = GoogleSignIn();
+    if (await googleSignIn.isSignedIn()) {
+      await googleSignIn.signOut();
+    }
+
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginPage()),
+          (_) => false,
     );
   }
 
@@ -80,34 +144,23 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5E6D6),
-      resizeToAvoidBottomInset: true, // Klavye ile taşmayı önlemek için
       appBar: AppBar(
         backgroundColor: const Color(0xFF800020),
-        title: const Text(
-          'Create a Profile',
-          style: TextStyle(color: Colors.white
-          ),
-        ),
-        iconTheme: const IconThemeData(
-            color: Colors.white
-        ),
+        title: const Text('Create a Profile', style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Stack(
         children: [
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomShape(),
-          ),
+          const Align(alignment: Alignment.bottomCenter, child: BottomShape()),
           SingleChildScrollView(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
+              children: [
                 GestureDetector(
                   onTap: () => _showIconSelectionBottomSheet(context),
                   child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16),
                     decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Icon(
                       _selectedProfileIcon ?? FontAwesomeIcons.user,
@@ -116,14 +169,9 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24.0),
-                _buildTextField(
-                  controller: _fullNameController,
-                  label: 'Full Name',
-                  hint: 'Your full name',
-                  icon: FontAwesomeIcons.user,
-                ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 24),
+                _buildTextField(controller: _fullNameController, label: 'Full Name', hint: 'Your full name', icon: FontAwesomeIcons.user),
+                const SizedBox(height: 16),
                 _buildTextField(
                   controller: _birthDateController,
                   label: 'Date of Birth (DD/MM/YYYY)',
@@ -131,89 +179,24 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
                   icon: FontAwesomeIcons.calendar,
                   readOnly: true,
                   onTap: () => _selectDate(context),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.date_range),
-                    onPressed: () => _selectDate(context),
-                  ),
+                  suffixIcon: IconButton(icon: const Icon(Icons.date_range), onPressed: () => _selectDate(context)),
                 ),
-                const SizedBox(height: 16.0),
-                _buildTextField(
-                  controller: _heightController,
-                  label: 'Height (cm)',
-                  icon: FontAwesomeIcons.rulerVertical,
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: 16.0),
-                _buildTextField(
-                  controller: _weightController,
-                  label: 'Weight (kg)',
-                  icon: FontAwesomeIcons.weightScale,
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 16),
+                _buildTextField(controller: _heightController, label: 'Height (cm)', icon: FontAwesomeIcons.rulerVertical, keyboardType: TextInputType.number),
+                const SizedBox(height: 16),
+                _buildTextField(controller: _weightController, label: 'Weight (kg)', icon: FontAwesomeIcons.weightScale, keyboardType: TextInputType.number),
+                const SizedBox(height: 16),
                 _buildGenderSelection(),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 32),
                 Row(
                   children: [
-                    Expanded(
-                      child: _buildCreateButton(
-                        label: 'Create(for myself)',
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print('Profile created(for myself).');
-
-                            // Redirect to HomeScreen
-                            Navigator.pushReplacementNamed(context, '/home');
-                          }
-                          Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
-                        },
-                      ),
-                    ),
+                    Expanded(child: _buildCreateButton(label: 'Create (Myself)', onPressed: () => _createProfile(true))),
                     const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildCreateButton(
-                        label: 'Create(for other person)',
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print('Profile created(for other person).');
-
-                            // Redirect to HomeScreen
-                            Navigator.pushReplacementNamed(context, '/home');
-                          }
-                          Navigator.pushNamed(context, '/home'); // Navigate to the profile screen.
-                        },
-                      ),
-                    ),
+                    Expanded(child: _buildCreateButton(label: 'Create (Other)', onPressed: () => _createProfile(false))),
                   ],
                 ),
                 TextButton(
-                  onPressed: () async {
-                  // Firebase çıkışı
-                  await FirebaseAuth.instance.signOut();
-
-                  // Google hesabıyla giriş yapıldıysa ondan da çık
-                  final googleSignIn = GoogleSignIn();
-                  if (await googleSignIn.isSignedIn()) {
-                    await googleSignIn.signOut();
-                  }
-                  // Control
-                  if (FirebaseAuth.instance.currentUser == null) {
-                    if (kDebugMode) {
-                      print('✅ Çıkış başarılı: currentUser == null');
-                    }
-                  } else {
-                    if (kDebugMode) {
-                      print('❌ Çıkış başarısız: currentUser != null');
-                    }
-                  }
-
-                  // Login ekranına yönlendir (önceki sayfaları temizleyerek)
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                        (Route<dynamic> route) => false,
-                  );
-                },
-
+                  onPressed: _logout,
                   child: const Text(
                     'Log Out!',
                     style: TextStyle(
@@ -270,10 +253,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
       ),
       child: Row(
         children: <Widget>[
@@ -282,11 +262,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
               title: const Text('Male'),
               value: 'male',
               groupValue: _selectedGender,
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedGender = value;
-                });
-              },
+              onChanged: (value) => setState(() => _selectedGender = value),
             ),
           ),
           Expanded(
@@ -294,11 +270,7 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
               title: const Text('Female'),
               value: 'female',
               groupValue: _selectedGender,
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedGender = value;
-                });
-              },
+              onChanged: (value) => setState(() => _selectedGender = value),
             ),
           ),
         ],
@@ -315,16 +287,11 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF800020),
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       child: Text(
         label,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
