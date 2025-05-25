@@ -14,6 +14,37 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       bottomNavigationBar: const CustomBottomNavBar(initialIndex: 2),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Container(
+          margin: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF6B0010).withOpacity(0.75),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 50,
+              shadows: [
+                Shadow(
+                  color: Colors.black26,
+                  offset: Offset(1, 1),
+                  blurRadius: 2,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
