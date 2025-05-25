@@ -9,11 +9,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dietly Home'),
-        centerTitle: true,
+      backgroundColor: const Color(0xFFF1E7DD),
+      body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(top:24.0, bottom:12),
+                  child: Center(
+                    child: Center(
+                      child: Image.asset(
+                          "assets/dietlylogo.png",
+                          height:280,
+                      ),
+                    ),
+                  ),
+              ),
+            ],
+          ),
       ),
-      body: const Center(child: Text('Ana Sayfa')),
       bottomNavigationBar: CustomBottomNavBar(initialIndex: 0),
     );
   }
