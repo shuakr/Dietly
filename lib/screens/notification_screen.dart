@@ -17,16 +17,41 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF1E7DD),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF6B0010),
-        elevation: 0,
-        title: const Text(
-          'Bildirimler',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Container(
+          margin: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF6B0010).withOpacity(0.60),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: const Center(
+            child: Text(
+              'Notifications',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    color: Colors.black26,
+                    offset: Offset(1, 1),
+                    blurRadius: 2,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
       ),
+
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('notifications')
@@ -38,7 +63,7 @@ class NotificationScreen extends StatelessWidget {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text("Hiç bildirim yok."));
+            return const Center(child: Text("No recent notifications."));
           }
 
           final notifications = snapshot.data!.docs;
@@ -64,7 +89,7 @@ class NotificationScreen extends StatelessWidget {
                   contentPadding: const EdgeInsets.all(16),
                   leading: const Icon(Icons.notifications, color: Color(0xFF6B0010)),
                   title: Text(
-                    data['title'] ?? 'Başlık yok',
+                    data['title'] ?? 'No Title',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
