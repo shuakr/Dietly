@@ -22,7 +22,7 @@ class NotificationScreen extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFF6B0010).withOpacity(0.60),
+            color: const Color(0xFF6B0010).withOpacity(0.75),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -33,20 +33,17 @@ class NotificationScreen extends StatelessWidget {
             ],
           ),
           child: const Center(
-            child: Text(
-              'Notifications',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    color: Colors.black26,
-                    offset: Offset(1, 1),
-                    blurRadius: 2,
-                  ),
-                ],
-              ),
+            child: Icon(
+              Icons.notifications,
+              color: Colors.white,
+              size: 50,
+              shadows: [
+                Shadow(
+                  color: Colors.black26,
+                  offset: Offset(1, 1),
+                  blurRadius: 2,
+                ),
+              ],
             ),
           ),
         ),
@@ -91,7 +88,8 @@ class NotificationScreen extends StatelessWidget {
                   title: Text(
                     data['title'] ?? 'No Title',
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16),
+                        fontWeight: FontWeight.bold, fontSize: 16
+                    ),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 6.0),
