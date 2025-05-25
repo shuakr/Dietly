@@ -1,5 +1,6 @@
 // lib/screens/home_screen.dart
 
+import 'package:dietly/widgets/food_list_card.dart';
 import 'package:flutter/material.dart';
 import '../widgets/salomon_bottom_bar.dart';
 
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
               ),
+              const FoodListCard(),
             ],
           ),
         ),

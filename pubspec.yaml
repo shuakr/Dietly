@@ -73,6 +73,7 @@ flutter:
   assets:
     - assets/dietlylogo.png
     - assets/animations/splash_screen.json
+    - assets/foodlist.png
 
   #   - images/a_dot_ham.jpeg
 
