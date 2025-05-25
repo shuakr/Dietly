@@ -259,16 +259,16 @@ class _ProfileCreationScreenState extends State<ProfileCreationScreen> {
         children: <Widget>[
           Expanded(
             child: RadioListTile<String>(
-              title: const Text('Male'),
-              value: 'male',
+              title: const Text('Erkek'),
+              value: 'Erkek',
               groupValue: _selectedGender,
               onChanged: (value) => setState(() => _selectedGender = value),
             ),
           ),
           Expanded(
             child: RadioListTile<String>(
-              title: const Text('Female'),
-              value: 'female',
+              title: const Text('Kadın'),
+              value: 'Kadın',
               groupValue: _selectedGender,
               onChanged: (value) => setState(() => _selectedGender = value),
             ),
