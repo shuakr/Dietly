@@ -41,6 +41,50 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
     });
   }
 
+  void saveSelectedItems() {
+    TextEditingController nameController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Name Your Selection"),
+          content: TextField(
+            controller: nameController,
+            decoration: const InputDecoration(hintText: "Enter name here"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () async {
+                final name = nameController.text.trim();
+                if (name.isNotEmpty && selectedItems.isNotEmpty) {
+                  await FirebaseFirestore.instance
+                      .collection("foodSelections")
+                      .add({
+                    "name": name,
+                    "items": selectedItems,
+                    "timestamp": FieldValue.serverTimestamp(),
+                  });
+
+                  setState(() {
+                    selectedItems.clear();
+                  });
+                }
+                Navigator.of(context).pop();
+              },
+              child: const Text("Save"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -104,6 +148,15 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
                       onTap: () => toggleSelection(item["name"]!),
                     );
                   },
+                ),
+                Positioned(
+                  bottom: 16.0,
+                  right: 16.0,
+                  child: FloatingActionButton(
+                    onPressed: saveSelectedItems,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: const Icon(Icons.save, color: Color(0xFFF5E7D0)),
+                  ),
                 ),
               ],
             ),
