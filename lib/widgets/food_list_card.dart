@@ -20,7 +20,7 @@ class _FoodListCardState extends State<FoodListCard>
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedScale(
         duration: const Duration(milliseconds: 200),
-        scale: _isHovered ? 1.03 : 1.0,
+        scale: _isHovered ? 1.0 : 1.05,
         child: GestureDetector(
           onTap: () {
             debugPrint("🍽️ Food List card tapped");
