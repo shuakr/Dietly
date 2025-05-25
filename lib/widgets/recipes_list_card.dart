@@ -44,7 +44,7 @@ class _RecipeListCardState extends State<RecipeListCard>
             child: Row(
               children: [
                 Image.asset(
-                  'assets/recipe.png', // Senin ikonunun yolu
+                  'assets/recipe.png',
                   height: 48,
                   width: 48,
                 ),

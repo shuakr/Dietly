@@ -44,7 +44,7 @@ class _FoodListCardState extends State<FoodListCard>
             child: Row(
               children: [
                 Image.asset(
-                  'assets/foodlist.png', // Senin ikonunun yolu
+                  'assets/foodlist.png',
                   height: 48,
                   width: 48,
                 ),
