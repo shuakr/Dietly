@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF1E7DD),
       body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -27,6 +28,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
       ),
       bottomNavigationBar: CustomBottomNavBar(initialIndex: 0),
     );
