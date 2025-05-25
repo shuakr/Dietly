@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/salomon_bottom_bar.dart';
+
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
 
@@ -80,6 +82,7 @@ class NotificationScreen extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: CustomBottomNavBar(initialIndex: 1),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../screens/home_screen.dart';
+import '../screens/notification_screen.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   final int initialIndex;
@@ -54,8 +55,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         break;
       case 1:
         debugPrint("🔔 Notifications button pressed");
-        Navigator.pushReplacementNamed(context, "/notification");
+        _navigateWithPageTransition(const NotificationScreen());
         break;
+
       case 2:
         _navigateWithPageTransition(const ProfilePage());
         break;
