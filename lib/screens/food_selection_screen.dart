@@ -85,6 +85,13 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
     );
   }
 
+  Stream<QuerySnapshot> getSelectionsStream() {
+    return FirebaseFirestore.instance
+        .collection("foodSelections")
+        .orderBy("timestamp", descending: true)
+        .snapshots();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -161,11 +168,33 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
               ],
             ),
 
-            // Placeholder for Saved Selections Tab
-            const Center(child: Text("Saved Selections")),
+            // Saved Selections Tab
+            StreamBuilder<QuerySnapshot>(
+              stream: getSelectionsStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return const Center(child: Text("No saved selections yet."));
+                }
+
+                return ListView(
+                  children: snapshot.data!.docs.map((doc) {
+                    final data = doc.data() as Map<String, dynamic>;
+                    return Card(
+                      margin: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: Text(data["name"] ?? "Unnamed"),
+                        subtitle: Text((data["items"] as List).join(", ")),
+                      ),
+                    );
+                  }).toList(),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
-  }
-}
