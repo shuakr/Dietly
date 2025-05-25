@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../widgets/salomon_bottom_bar.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withAlpha(25), // ← güncellendi
+                        color: Colors.black.withAlpha(25),
                         spreadRadius: 2,
                         blurRadius: 6,
                         offset: const Offset(0, 3),
