@@ -9,11 +9,11 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const mainColor = Color(0xFF6B0010);
-    const bgColor = Colors.white;
+    const bgColor = Color(0xFFF1E7DD);
 
     return Scaffold(
       backgroundColor: bgColor,
-      bottomNavigationBar: const CustomBottomNavBar(initialIndex: 2), // 👈 eklendi
+      bottomNavigationBar: const CustomBottomNavBar(initialIndex: 2),
       body: SafeArea(
         child: Column(
           children: [
@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/avatar.png'),
+              backgroundImage: AssetImage('assets/dietlylogo.png'),
             ),
             const SizedBox(height: 10),
             const Text(

@@ -54,7 +54,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         _navigateWithPageTransition(const HomeScreen());
         break;
       case 1:
-        debugPrint("🔔 Notifications button pressed");
         _navigateWithPageTransition(const NotificationScreen());
         break;
 
