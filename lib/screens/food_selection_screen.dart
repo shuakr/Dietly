@@ -198,3 +198,5 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
         ),
       ),
     );
+  }
+}
