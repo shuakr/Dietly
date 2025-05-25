@@ -74,7 +74,6 @@ class NotificationScreen extends StatelessWidget {
               if (data == null) {
                 return const SizedBox();
               }
-
               return Card(
                 color: Colors.white,
                 margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),

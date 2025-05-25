@@ -16,11 +16,10 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> {
-  // E-posta ve şifre alanları için controller'lar
+  // Controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // E-posta/şifre ile giriş yapma işlemi
   Future<void> _signInWithEmailAndPassword() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
@@ -72,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
   }
 
-  // Google ile giriş işlemi
+  // Sign in with Google
   Future<void> _handleGoogleSignIn() async {
     final googleAuthService = GoogleAuthService();
     final userCredential = await googleAuthService.signInWithGoogle();

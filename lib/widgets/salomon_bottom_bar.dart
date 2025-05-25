@@ -30,7 +30,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     currentIndex = widget.initialIndex;
   }
 
-  /// PageTransition ile animasyonlu geçiş
   void _navigateWithPageTransition(Widget page) {
     Navigator.pushReplacement(
       context,

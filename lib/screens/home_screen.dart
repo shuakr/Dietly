@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(initialIndex: 0),
+      bottomNavigationBar: CustomBottomNavBar(initialIndex: 0), //Salomon bottom bar
     );
   }
 }

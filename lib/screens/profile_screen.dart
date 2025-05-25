@@ -86,7 +86,7 @@ class ProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withAlpha(25), // ← güncellendi
+                        color: Colors.black.withAlpha(25),
                         spreadRadius: 2,
                         blurRadius: 6,
                         offset: const Offset(0, 3),
@@ -94,7 +94,7 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                   child: const Text(
-                    "Mesaj Gönder",
+                    "Send Message",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                   child: const Text(
-                    "Takip Et",
+                    "Follow!",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

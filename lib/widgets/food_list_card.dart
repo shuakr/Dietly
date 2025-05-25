@@ -1,4 +1,3 @@
-// lib/widgets/food_list_card.dart
 
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class _FoodListCardState extends State<FoodListCard>
         child: GestureDetector(
           onTap: () {
             debugPrint("🍽️ Food List card tapped");
-            // TODO: Navigate or handle tap
+            // Add navigate.
           },
           child: Container(
             width: double.infinity,
