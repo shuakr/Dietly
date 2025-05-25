@@ -68,10 +68,48 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            SizedBox(),
-            SizedBox(),
+            // Food Selection Tab
+            Stack(
+              children: [
+                ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    final isSelected = selectedItems.contains(item["name"]!);
+                    return ListTile(
+                      leading: Container(
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? const Color(0xFFF5E7D0)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Image.asset(
+                          "assets/foods/${item["icon"]}",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                      title: Text(item["name"]!),
+                      trailing: Icon(
+                        isSelected
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+                        color: isSelected
+                            ? Theme.of(context).primaryColor
+                            : null,
+                      ),
+                      onTap: () => toggleSelection(item["name"]!),
+                    );
+                  },
+                ),
+              ],
+            ),
+
+            // Placeholder for Saved Selections Tab
+            const Center(child: Text("Saved Selections")),
           ],
         ),
       ),
