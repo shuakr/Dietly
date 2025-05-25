@@ -1,3 +1,4 @@
+import 'package:dietly/screens/notification_screen.dart';
 import 'package:dietly/screens/profile_creation_screen.dart';
 import 'package:dietly/screens/profile_screen.dart';
 import 'package:dietly/screens/register_screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/profileCreation': (context) => const ProfileCreationScreen(),
         '/profileScreen' : (context) => const ProfilePage(),
         '/home': (context) => const HomeScreen(), //To home page
+        '/notification': (context) => const NotificationScreen(),
 
       },
       theme: ThemeData(

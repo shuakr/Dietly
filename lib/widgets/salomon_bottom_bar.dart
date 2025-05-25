@@ -54,6 +54,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         break;
       case 1:
         debugPrint("🔔 Notifications button pressed");
+        Navigator.pushReplacementNamed(context, "/notification");
         break;
       case 2:
         _navigateWithPageTransition(const ProfilePage());
