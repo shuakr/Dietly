@@ -7,6 +7,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:dietly/widgets/bottom_shape.dart';
 import 'package:dietly/screens/register_screen.dart';
 import 'package:dietly/service/google_auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -33,12 +34,23 @@ class _LoginPageState extends State<LoginPage> {
         password: password,
       );
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ProfileCreationScreen(),
-        ),
-      );
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+
+        if (userDoc.exists) {
+          Navigator.pushNamed(context, '/home');
+        } else {
+          Navigator.pushNamed(context, '/profileCreation');
+        }
+      }
+
+
+
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
         print("Firebase Auth Hatası: ${e.code}");
