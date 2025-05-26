@@ -49,7 +49,7 @@ class _RecipeListCardState extends State<RecipeListCard>
                 ),
                 const SizedBox(width: 16),
                 const Text(
-                  'Recipes',
+                  'Recipes (Still in progress...)',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
