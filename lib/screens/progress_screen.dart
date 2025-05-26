@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
+
+import 'home_screen.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
@@ -134,6 +137,16 @@ class _ProgressScreenState extends State<ProgressScreen> {
       }
     }
   }
+  void _navigateWithPageTransition(Widget page) {
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 400),
+        child: page,
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -154,7 +167,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF800020)),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
+            _navigateWithPageTransition(const HomeScreen());
           },
         ),
       ),

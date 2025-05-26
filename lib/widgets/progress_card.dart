@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../screens/progress_screen.dart';
 
 class ProgressCard extends StatefulWidget {
   const ProgressCard({super.key});
@@ -10,6 +13,17 @@ class ProgressCard extends StatefulWidget {
 class _ProgressCardState extends State<ProgressCard> {
   bool isHovered = false;
 
+  void _navigateWithPageTransition(Widget page) {
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 400),
+        child: page,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -19,7 +33,7 @@ class _ProgressCardState extends State<ProgressCard> {
       child: GestureDetector( // GestureDetector eklendi
         onTap: () {
           debugPrint("📊 Progress card tapped");
-          Navigator.pushReplacementNamed(context, '/progress');
+          _navigateWithPageTransition(const ProgressScreen());
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
