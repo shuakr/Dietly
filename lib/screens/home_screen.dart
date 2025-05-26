@@ -1,6 +1,5 @@
 // lib/screens/home_screen.dart
 
-import 'dart:io';
 
 import 'package:dietly/widgets/food_list_card.dart';
 import 'package:dietly/widgets/progress_card.dart';

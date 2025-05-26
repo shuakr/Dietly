@@ -398,12 +398,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainColor),
                   _buildProfileInfoRow(
                       'Boy',
-                      (_userProfile?['height']?.toString() ?? 'N/A') + ' cm',
+                      '${_userProfile?['height']?.toString() ?? 'N/A'} cm',
                       FontAwesomeIcons.rulerVertical,
                       mainColor),
                   _buildProfileInfoRow(
                       'Kilo',
-                      (_userProfile?['weight']?.toString() ?? 'N/A') + ' kg',
+                      '${_userProfile?['weight']?.toString() ?? 'N/A'} kg',
                       FontAwesomeIcons.weightScale,
                       mainColor),
                   _buildProfileInfoRow(
