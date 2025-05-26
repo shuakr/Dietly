@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FoodSelectionScreen extends StatefulWidget {
-  const FoodSelectionScreen({Key? key}) : super(key: key);
+  const FoodSelectionScreen({super.key});
 
   @override
   State<FoodSelectionScreen> createState() => _FoodSelectionScreenState();
