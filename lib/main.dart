@@ -2,6 +2,7 @@ import 'package:dietly/screens/food_selection_screen.dart';
 import 'package:dietly/screens/notification_screen.dart';
 import 'package:dietly/screens/profile_creation_screen.dart';
 import 'package:dietly/screens/profile_screen.dart';
+import 'package:dietly/screens/progress_screen.dart';
 import 'package:dietly/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/notification': (context) => const NotificationScreen(),
         '/foodlist': (context) => const FoodSelectionScreen(),
+        '/progress': (context) => const ProgressScreen(),
 
       },
       theme: ThemeData(
