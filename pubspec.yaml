@@ -76,6 +76,23 @@ flutter:
     - assets/foodlist.png
     - assets/recipe.png
     - assets/goal.png
+    - assets/foods/army-stew.png
+    - assets/foods/ayran.png
+    - assets/foods/black-tea.png
+    - assets/foods/bread.png
+    - assets/foods/butter.png
+    - assets/foods/cereals.png
+    - assets/foods/cheese.png
+    - assets/foods/chicken.png
+    - assets/foods/coffee-cup.png
+    - assets/foods/fried-egg (1).png
+    - assets/foods/honey.png
+    - assets/foods/kebab.png
+    - assets/foods/olives.png
+    - assets/foods/salad.png
+    - assets/foods/sandwich.png
+    - assets/foods/soup.png
+    - assets/foods/steak.png
 
   #   - images/a_dot_ham.jpeg
 
