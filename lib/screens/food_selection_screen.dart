@@ -106,7 +106,7 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Color(0xFFF5E7D0)),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pushReplacementNamed(context, '/home');
             },
           ),
           bottom: const TabBar(
