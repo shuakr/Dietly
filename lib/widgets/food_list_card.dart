@@ -23,7 +23,7 @@ class _FoodListCardState extends State<FoodListCard>
         child: GestureDetector(
           onTap: () {
             debugPrint("🍽️ Food List card tapped");
-            // Add navigate.
+            Navigator.pushReplacementNamed(context, '/foodlist');
           },
           child: Container(
             width: double.infinity,
