@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,7 +69,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
         scheduledMeals["${day}_$time"] = menuName;
       });
     } catch (e) {
-      print("Öğün kaydetme hatası: $e");
+      if (kDebugMode) {
+        print("Öğün kaydetme hatası: $e");
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Öğün kaydedilirken bir hata oluştu: $e")),
       );
@@ -87,7 +90,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
         scheduledMeals.remove("${day}_$time");
       });
     } catch (e) {
-      print("Öğün silme hatası: $e");
+      if (kDebugMode) {
+        print("Öğün silme hatası: $e");
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Öğün silinirken bir hata oluştu: $e")),
       );
@@ -124,7 +129,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
         scheduledMeals = loadedMeals;
       });
     } catch (e) {
-      print("Planlanmış öğünleri yükleme hatası: $e");
+      if (kDebugMode) {
+        print("Planlanmış öğünleri yükleme hatası: $e");
+      }
     }
   }
 

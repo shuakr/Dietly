@@ -15,7 +15,6 @@ class BottomShape extends StatelessWidget {
   }
 }
 
-// Sol üçgen
 class LeftTriangle extends StatelessWidget {
   const LeftTriangle({super.key});
 
@@ -46,7 +45,6 @@ class LeftTriangleClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-// Sağ üçgen
 class RightTriangle extends StatelessWidget {
   const RightTriangle({super.key});
 
@@ -77,7 +75,6 @@ class RightTriangleClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-// Orta beşgen
 class MiddlePentagon extends StatelessWidget {
   const MiddlePentagon({super.key});
 

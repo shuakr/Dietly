@@ -19,7 +19,7 @@ class _ProgressCardState extends State<ProgressCard> {
       child: GestureDetector( // GestureDetector eklendi
         onTap: () {
           debugPrint("📊 Progress card tapped");
-          Navigator.pushReplacementNamed(context, '/progress'); // Yönlendirme eklendi
+          Navigator.pushReplacementNamed(context, '/progress');
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),

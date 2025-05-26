@@ -1,4 +1,3 @@
-// lib/widgets/food_list_card.dart
 
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class _RecipeListCardState extends State<RecipeListCard>
         child: GestureDetector(
           onTap: () {
             debugPrint("🍽️ Recipes card tapped");
-            // TODO: Navigate or handle tap
+            // TODO: Navigate or handle tap on new versions
           },
           child: Container(
             width: double.infinity,

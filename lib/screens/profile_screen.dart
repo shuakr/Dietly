@@ -166,8 +166,8 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Row(
             children: [
-              Icon(icon, color: color, size: 28), // Icon boyutu arttırıldı
-              const SizedBox(width: 20), // Boşluk arttırıldı
+              Icon(icon, color: color, size: 28),
+              const SizedBox(width: 20),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,16 +175,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text(
                       label,
                       style: TextStyle(
-                        fontSize: 16, // Etiket font boyutu arttırıldı
+                        fontSize: 16,
                         color: Colors.grey[700],
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 6), // Boşluk arttırıldı
+                    const SizedBox(height: 6),
                     Text(
                       value,
                       style: const TextStyle(
-                        fontSize: 18, // Değer font boyutu arttırıldı
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF6B0010),
                       ),
@@ -195,12 +195,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 8.0), // Çizginin üstüne boşluk eklendi
+            padding: EdgeInsets.only(top: 8.0),
             child: Divider(
-              color: Color(0xFFD4B499), // Uyumlu bir renk seçildi
-              thickness: 1.5, // Çizgi kalınlığı arttırıldı
-              indent: 0, // Sol boşluk
-              endIndent: 0, // Sağ boşluk
+              color: Color(0xFFD4B499),
+              thickness: 1.5,
+              indent: 0,
+              endIndent: 0,
             ),
           ),
         ],
@@ -224,11 +224,11 @@ class _ProfilePageState extends State<ProfilePage> {
         keyboardType: keyboardType,
         readOnly: readOnly,
         onTap: onTap,
-        style: const TextStyle(fontSize: 16), // Editable alan font boyutu arttırıldı
+        style: const TextStyle(fontSize: 16),
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(fontSize: 16, color: Colors.grey[700]),
-          prefixIcon: Icon(icon, color: const Color(0xFF6B0010), size: 24), // Icon boyutu arttırıldı
+          prefixIcon: Icon(icon, color: const Color(0xFF6B0010), size: 24),
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
@@ -237,7 +237,7 @@ class _ProfilePageState extends State<ProfilePage> {
           filled: true,
           fillColor: Colors.white,
           contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 14), // Padding arttırıldı
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
       ),
     );
@@ -316,7 +316,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 _userProfile?['fullName'] ?? 'İsim Yükleniyor...',
                 style: const TextStyle(
-                    fontSize: 24, // İsim font boyutu arttırıldı
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: mainColor),
               ),

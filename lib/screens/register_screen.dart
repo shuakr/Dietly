@@ -153,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Registration successful!")),
                     );
-                    Navigator.pop(context); // Login ekranına geri dön
+                    Navigator.pop(context);
                   } else if (errorMessage.isNotEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Error: $errorMessage")),
