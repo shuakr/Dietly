@@ -1,5 +1,7 @@
 
+import 'package:dietly/screens/food_selection_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FoodListCard extends StatefulWidget {
   const FoodListCard({super.key});
@@ -12,6 +14,17 @@ class _FoodListCardState extends State<FoodListCard>
     with SingleTickerProviderStateMixin {
   bool _isHovered = false;
 
+  void _navigateWithPageTransition(Widget page) {
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 400),
+        child: page,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -23,7 +36,7 @@ class _FoodListCardState extends State<FoodListCard>
         child: GestureDetector(
           onTap: () {
             debugPrint("🍽️ Food List card tapped");
-            Navigator.pushReplacementNamed(context, '/foodlist');
+            _navigateWithPageTransition(const FoodSelectionScreen());
           },
           child: Container(
             width: double.infinity,

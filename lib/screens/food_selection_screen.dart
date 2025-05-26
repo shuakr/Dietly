@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:page_transition/page_transition.dart';
+
+import 'home_screen.dart';
 
 class FoodSelectionScreen extends StatefulWidget {
   const FoodSelectionScreen({super.key});
@@ -42,6 +45,16 @@ void toggleSelection(String item) {
     }
   });
 }
+  void _navigateWithPageTransition(Widget page) {
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 400),
+        child: page,
+      ),
+    );
+  }
 
 void saveSelectedItems() {
   final User? currentUser = _auth.currentUser;
@@ -114,7 +127,7 @@ Widget build(BuildContext context) {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF800020)),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
+            _navigateWithPageTransition(const HomeScreen());
           },
         ),
         bottom: const TabBar(
