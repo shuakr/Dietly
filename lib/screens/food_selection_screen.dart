@@ -100,18 +100,18 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
         appBar: AppBar(
           title: const Text(
             "Food Selection",
-            style: TextStyle(color: Color(0xFFF5E7D0)),
+            style: TextStyle(color: Color(0xFF800020)),
           ),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Color(0xFFD6A7B1),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFFF5E7D0)),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF800020)),
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/home');
             },
           ),
           bottom: const TabBar(
             indicatorColor: Color(0xFFF5E7D0),
-            labelColor: Color(0xFFF5E7D0),
+            labelColor: Color(0xFF800020),
             unselectedLabelColor: Colors.white70,
             tabs: [
               Tab(text: "Food Screen"),
@@ -161,8 +161,8 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
                   right: 16.0,
                   child: FloatingActionButton(
                     onPressed: saveSelectedItems,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: const Icon(Icons.save, color: Color(0xFFF5E7D0)),
+                    backgroundColor: Color(0xFFD6A7B1),
+                    child: const Icon(Icons.save, color: Color(0xFF800020)),
                   ),
                 ),
               ],
